@@ -15,15 +15,25 @@ public class MainRunner {
 
 
         EmployeeService es = new EmployeeService();
-        Employee e = new Employee("LeAh", 2000.0D, "E-Commerce");
+
+
+
+       /* Employee e = new Employee("LeAh", 2000.0D, "E-Commerce");
         Employee e2 = new Employee("robert", 3000.0D, "Full Stack developer");
         Employee e3 = new Employee("jafer", 2000.0D, "Management");
         es.createEmp(e);
         es.createEmp(e2);
-        es.createEmp(e3);
+        es.createEmp(e3);*/
 
-        Employee ee = es.findById(e2.getEId());
-        System.out.println(ee);
+
+        Employee eDelete = es.findById(3);
+        System.out.println(eDelete);
+        es.deleteEmp(eDelete);
+
+        //Employee ee = es.findById(e2.getEId());
+       // System.out.println(ee);
+
+
 
         /*EntityManagerFactory emf = JpaUtil.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();

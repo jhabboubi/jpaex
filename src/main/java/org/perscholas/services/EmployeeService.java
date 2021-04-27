@@ -18,6 +18,7 @@ public class EmployeeService implements IEmployee {
         // cleanup
 
         e.setEName(e.getEName().toLowerCase().trim());
+
         // open connection
         // session
         EntityManager em = emf.createEntityManager();
@@ -26,6 +27,7 @@ public class EmployeeService implements IEmployee {
 
             em.getTransaction().begin();
             em.persist(e);
+
             em.getTransaction().commit();
 
         }catch(RollbackException ex){
@@ -65,6 +67,20 @@ public class EmployeeService implements IEmployee {
 
     @Override
     public void deleteEmp(Employee e) {
+        EntityManager em = emf.createEntityManager();
+        try {
+
+            em.getTransaction().begin();
+
+            em.remove(em.find(Employee.class, e.getEId()));
+
+            em.getTransaction().commit();
+        } catch(Exception ex){
+            em.getTransaction().rollback();
+            ex.printStackTrace();
+        }finally {
+            em.close();
+        }
 
     }
 
@@ -77,6 +93,7 @@ public class EmployeeService implements IEmployee {
         //transaction
         try {
             em.getTransaction().begin();
+
             //Query q = em.createQuery("FROM Employee as e WHERE e.eId = :givenID");
             Query q = em.createNamedQuery("from Employee by ID");
             q.setParameter("id", id);
@@ -86,11 +103,13 @@ public class EmployeeService implements IEmployee {
         } catch(IllegalArgumentException | EntityNotFoundException | RollbackException ex){
           ex.printStackTrace();
           log.error("commit issue or no records found!");
-          em.getTransaction().rollback();
+          em.getTransaction().commit();
         } finally {
             em.close();
         }
 
         return e;
     }
+
+
 }
