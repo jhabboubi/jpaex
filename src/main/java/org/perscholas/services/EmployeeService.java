@@ -72,8 +72,8 @@ public class EmployeeService implements IEmployee {
 
             em.getTransaction().begin();
 
-            em.remove(em.find(Employee.class, e.getEId()));
-
+            Employee ee = em.merge(e);
+            em.remove(ee);
             em.getTransaction().commit();
         } catch(Exception ex){
             em.getTransaction().rollback();

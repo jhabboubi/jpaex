@@ -26,7 +26,7 @@ public class MainRunner {
         es.createEmp(e3);*/
 
 
-        Employee eDelete = es.findById(3);
+        Employee eDelete = es.findById(4);
         System.out.println(eDelete);
         es.deleteEmp(eDelete);
 
