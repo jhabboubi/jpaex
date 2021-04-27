@@ -9,7 +9,7 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-
+@AllArgsConstructor
 @Entity
 public class Employee {
 
