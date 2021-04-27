@@ -17,10 +17,13 @@ import javax.persistence.*;
 public class Staff {
 
     //fields
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     int sId;
     String sName;
     public Staff(){}
+    public Staff(String sName){
+        this.sName = sName;
+    }
     public Staff(int sId,String sName){
         this.sId = sId;
         this.sName = sName;

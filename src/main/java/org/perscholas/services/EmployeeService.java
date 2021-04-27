@@ -11,13 +11,14 @@ import java.util.Locale;
 
 @Log4j
 public class EmployeeService implements IEmployee {
+    static EntityManagerFactory emf = JpaUtil.getEntityManagerFactory();
+
     @Override
     public void createEmp(Employee e) {
         // cleanup
 
         e.setEName(e.getEName().toLowerCase().trim());
         // open connection
-        EntityManagerFactory emf = JpaUtil.getEntityManagerFactory();
         // session
         EntityManager em = emf.createEntityManager();
         //transaction
@@ -47,7 +48,6 @@ public class EmployeeService implements IEmployee {
         }finally {
             //close everything
             em.close();
-            JpaUtil.shutdown();
         }
 
 
@@ -66,5 +66,31 @@ public class EmployeeService implements IEmployee {
     @Override
     public void deleteEmp(Employee e) {
 
+    }
+
+    @Override
+    public Employee findById(int id) {
+        // open connection
+        // session
+        EntityManager em = emf.createEntityManager();
+        Employee e = null;
+        //transaction
+        try {
+            em.getTransaction().begin();
+            //Query q = em.createQuery("FROM Employee as e WHERE e.eId = :givenID");
+            Query q = em.createNamedQuery("from Employee by ID");
+            q.setParameter("id", id);
+             e = (Employee) q.getSingleResult();
+            //close everything
+            em.getTransaction().commit();
+        } catch(IllegalArgumentException | EntityNotFoundException | RollbackException ex){
+          ex.printStackTrace();
+          log.error("commit issue or no records found!");
+          em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+
+        return e;
     }
 }

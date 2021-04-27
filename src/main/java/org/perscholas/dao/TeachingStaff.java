@@ -19,8 +19,8 @@ public class TeachingStaff extends Staff{
     String subjectExpertise;
 
     public TeachingStaff() {}
-    public TeachingStaff(int sId, String sName, String qualification,String subjectExpertise){
-        super(sId, sName);
+    public TeachingStaff(String sName, String qualification,String subjectExpertise){
+        super(sName);
         this.qualification = qualification;
         this.subjectExpertise = subjectExpertise;
     }

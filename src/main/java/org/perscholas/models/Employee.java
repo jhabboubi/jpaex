@@ -11,6 +11,7 @@ import javax.persistence.*;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @Entity
+@NamedQuery(query="SELECT e FROM Employee e WHERE e.eId = :id",name="from Employee by ID")
 public class Employee {
 
     //fields
