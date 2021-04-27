@@ -15,4 +15,8 @@ public interface IEmployee {
     //d
     void deleteEmp(Employee e);
 
+    //custom
+    Employee findById(int id);
+
+
 }

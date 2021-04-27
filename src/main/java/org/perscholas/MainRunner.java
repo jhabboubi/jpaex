@@ -1,5 +1,6 @@
 package org.perscholas;
 
+import org.perscholas.dao.NonTeachingStaff;
 import org.perscholas.dao.TeachingStaff;
 import org.perscholas.models.Employee;
 import org.perscholas.services.EmployeeService;
@@ -20,7 +21,10 @@ public class MainRunner {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         TeachingStaff ts = new TeachingStaff(1, "jafer", "h", "hh");
+        NonTeachingStaff ns = new NonTeachingStaff(2,"Tim", "Java");
         em.persist(ts);
+        em.persist(ns);
+
         em.getTransaction().commit();
         em.close();
     }
