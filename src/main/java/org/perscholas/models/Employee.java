@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Employee {
 
     //fields
-    @Id @GeneratedValue(strategy = GenerationType.AUTO) @Column(columnDefinition = "INT(11) UNSIGNED")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(columnDefinition = "INT(11) UNSIGNED")
     int eId;
     String eName;
     double eSalary;
